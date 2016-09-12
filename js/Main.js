@@ -1,5 +1,7 @@
 // Handles HTML and wiring data
 // Using Three v60
+// Originally written by Felix Turner @felixturner
+// Modified by Matthew Chiang
 
 var events = new Events();
 
@@ -16,7 +18,6 @@ var Main = function() {
 
 		AudioHandler.init();
 		ControlsHandler.init();
-		// CirclesViz.init();
 
 		function createStats() {
 			var stats = new Stats();
@@ -25,6 +26,7 @@ var Main = function() {
 			stats.domElement.style.position = 'absolute';
 			stats.domElement.style.left = '0';
 			stats.domElement.style.top = '0';
+			stats.domElement.style.zIndex = '999';
 
 			return stats;
 		}

@@ -83,58 +83,18 @@ var AudioHandler = function() {
 			levelHistory.push(0);
 		}
 
-		// INIT DEBUG DRAW
-		initCanvas();
-	}
-
-	function initCanvas() {
-		var canvas = document.getElementById("audioDebug");
-		debugCtx = canvas.getContext('2d');
-		debugCtx.width = debugW;
-		debugCtx.height = debugH;
-		debugCtx.fillStyle = "rgb(40, 40, 40)";
-		// debugCtx.lineWidth = 1;
-		c = new Circle(debugW / 2, debugH / 2, 50);
-		// debugCtx.strokeStyle = "rgb(255, 255, 255)";
-		$('#audioDebugCtx').hide();
-
-		// var imageObj = new Image();
-		// imageObj.onload = function() {
-		// 	debugCtx.drawImage(imageObj, 0, 0);
-		// };
-		// imageObj.src = 'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg';
-
-
-		// gradient = debugCtx.createLinearGradient(0, 0, 0, 256);
-		// gradient.addColorStop(1,'#330000');
-		// gradient.addColorStop(0.75,'#aa0000');
-		// gradient.addColorStop(0.5,'#aaaa00');
-		// gradient.addColorStop(1,'#aaaaaa');
 	}
 
 	function preShake() {
-		// if (shakeStartTime == -1) return;
-		// var dt = Date.now() - shakeStartTime;
-		// if (dt > shakeDuration) {
-		// 	shakeStartTime = -1;
-		// 	return;
-		// }
-		// var easingCoef = dt / shakeDuration;
-		// var easing = Math.pow(easingCoef-1, 3) + 1;
 		// debugCtx.save();
-		// var dx = easing*(Math.cos(dt*0.1) + Math.cos(dt*0.3115))*15;
-		// var dy = easing*(Math.sin(dt*0.05) + Math.sin(dt*0.057113))*15;
-		// debugCtx.translate(dx, dy);
-		debugCtx.save();
 		var dx = (Math.floor(Math.random()*201)-100) / 5;
 		var dy = (Math.floor(Math.random()*201)-100) / 5;
-		debugCtx.translate(dx, dy);
-		// console.log("hi");
+		// debugCtx.translate(dx, dy);
 	}
 
 	function postShake() {
 		// if (shakeStartTime == -1) return;
-		debugCtx.restore();
+		// debugCtx.restore();
 	}
 
 	function startShake() {
@@ -184,9 +144,6 @@ var AudioHandler = function() {
 		source.loop = true;
 		source.start(0.0);
 		isPlayingAudio = true;
-		//startViz();
-
-		$("#preloader").hide();
 	}
 
 	function stopSound() {
@@ -195,7 +152,6 @@ var AudioHandler = function() {
 			source.stop(0);
 			source.disconnect();
 		}
-		// debugCtx.clearRect(0, 0, debugW, debugH);
 	}
 
 	function onUseMic() {
@@ -302,7 +258,6 @@ var AudioHandler = function() {
 	function update() {
 
 		if (!isPlayingAudio) {
-			debugDraw();
 			return;
 		}
 
@@ -348,8 +303,6 @@ var AudioHandler = function() {
 			onBeat();
 
 			// add a circle for the detected beat
-			var c = new Circle(debugW / 2, debugH / 2, level);
-			circles.push(c);
 			preShake();
 
 			beatCutOff = level * 1.1;
@@ -366,56 +319,7 @@ var AudioHandler = function() {
 		bpmTime = (new Date().getTime() - bpmStart)/msecsAvg;
 		// trace (bpmStart);
 
-		debugDraw();
 		postShake();
-	}
-
-	function debugDraw() {
-		
-		now = Date.now();
-		delta = now - then;
-
-		if (delta > interval) {
-			then = now - (delta % interval);
-			for (var i = 0; i < circles.length; i++) {
-				circles[i].update(level * 10);
-				circles[i].draw(debugCtx);
-			}
-		}
-
-		// Memory management
-		if (circles.length > 50) {
-			circles.splice(0, 1);
-		}
-
-		requestAnimationFrame(debugDraw);
-
-		// // DRAW BAR CHART
-		// // Break the samples up into bars
-		// var barWidth = chartW / levelsCount;
-		// debugCtx.fillStyle = gradient;
-		// for (var i = 0; i < levelsCount; i++) {
-		// 	debugCtx.fillRect(i * barWidth, chartH, barWidth - debugSpacing, -levelsData[i]*chartH);
-		// }
-        //
-		// // DRAW AVE LEVEL + BEAT COLOR
-		// if (beatTime < 6) {
-		// 	debugCtx.fillStyle = "#FFF";
-		// }
-		// debugCtx.fillRect(chartW, chartH, aveBarWidth, -level*chartH);
-        //
-		// // DRAW CUT OFF
-		// debugCtx.beginPath();
-		// debugCtx.moveTo(chartW, chartH - beatCutOff*chartH);
-		// debugCtx.lineTo(chartW + aveBarWidth, chartH - beatCutOff*chartH);
-		// debugCtx.stroke();
-        //
-		// // DRAW WAVEFORM
-		// debugCtx.beginPath();
-		// for (var i = 0; i < binCount; i++) {
-		// 	debugCtx.lineTo(i/binCount*chartW, waveData[i]*chartH/2 + chartH/2);
-		// }
-		// debugCtx.stroke();
 	}
 
 	return {
