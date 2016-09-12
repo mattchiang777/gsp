@@ -87,24 +87,44 @@ function transform() {
             else {
                 // v.x += Math.random() * x / 25;
                 // v.y += Math.random() * y / 25;
-                v.x += AudioHandler.getLevel() * x / 25;
-                v.y += AudioHandler.getLevel() * y / 25;
-                textGroup.opacity -= 1/10000;
+                v.x += AudioHandler.getLevel() * x / 5;
+                v.y += AudioHandler.getLevel() * y / 5;
+                textGroup.opacity -= 1/1000;
             }
         }
     })
 };
 
+// Change the background if the sound level is greater than a certain point
+function bgChangeColor() {
+    if (AudioHandler.getLevel() < 0.2) {
+        $('#draw-shapes').css('animationDuration', '0s');
+        resetText();
+        resetVertices();
+    } else {
+        var newDuration = AudioHandler.getLevel() * 25 + 's';
+        $('#draw-shapes').css('animationDuration', newDuration);
+    }
+
+}
+
+function resetText() {
+    textGroup.opacity = 1;
+}
+
+function resetVertices() {
+    $.each(group.children, function(idx, val) {
+        for (var i = 0; i < val.vertices.length; i++) {
+            var v = val.vertices[i];
+            // Redraw the circles back to their original vertices if levels get low
+            v.x = VERTICES[i].x;
+            v.y = VERTICES[i].y;
+        }
+    })
+}
+
 // Tell two to do an initial rendering on the screen
 two.update();
-
-// Hover over to start playing
-$("#draw-shapes").mouseover(function() {
-    two.bind('update', transform);
-    two.play();
-});
-
-$("#draw-shapes").mouseout(function() {
-    two.unbind('update', transform);
-    two.pause();
-});
+two.bind('update', bgChangeColor);
+two.bind('update', transform);
+two.play();
