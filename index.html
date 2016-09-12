@@ -1,16 +1,37 @@
 <!DOCTYPE html>
 <html >
-  <head>
-	<meta charset="UTF-8">
-	<title>Wiggling Circles in a row with text</title>
-	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/style.css">
-  </head>
-  <body id="draw-shapes">
+    <head>
+        <meta charset="UTF-8">
+        <title>Wiggling Circles in a row with text</title>
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body id="draw-shapes">
 
-  </body>
+        <div id="info">
+            <h2>Circles Audio Visualization</h2>
+            <p>Drop an MP3 file to play it, or switch to the mic input. Requires Chrome for WebGL.</p>
+            <p>1. The number of rings should be determined by the sounds detected</p>
+            <p>2. The speed of the rings is determined by the frequency. Higher frequencies travel faster and lower frequencies travel slower.</p>
+            <p>3. The width/thickness of the ring is also determined by the frequency. Higher frequencies result in thin rings and lower frequencies result in thicker rings. </p>
+            <p>4. Colors of rings should be random.</p>
+            </p>
+            <p>Sample Music: "Notorious" by Malaa</p>
+        </div>
+        <div id="controls"></div>
 
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/two.js/0.6.0/two.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js'></script>
-  <script src="js/index.js"></script>
+    </body>
+
+    <!-- Audio-related scripts -->
+    <script src="lib/minivents.min.js"></script>
+    <script src='lib/dat.gui.min.js'></script>
+    <script src="lib/atutil.js"></script>
+    <script src="js/Main.js"></script>
+    <script src="js/AudioHandler.js"></script>
+    <script src="js/ControlsHandler.js"></script>
+    <script src="js/Circle.js"></script>
+    <!-- jQuery and Two.js -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/two.js/0.6.0/two.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js'></script>
+    <script src="js/index.js"></script>
 </html>

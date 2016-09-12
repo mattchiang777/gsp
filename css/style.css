@@ -1,5 +1,7 @@
+/* Logo styling */
+
 body {
-  font-family: 'Proxima Nova', sans-serif;
+    font-family: 'Proxima Nova', sans-serif;
 }
 
 #draw-shapes {
@@ -37,4 +39,31 @@ body {
     50% {background: #58585B;}
     75% {background: #C1B257;}
     100% {background: #FF5185;}
+}
+
+/* Audio styling */
+
+#controls {
+    position:absolute;
+    background-color: #000;
+    top: 400px;
+    right:10px;
+    width:250px;
+    z-index: 999;
+}
+
+#info {
+    position:absolute;
+    background-color: #000;
+    top: 0px;
+    right:10px;
+    width:250px;
+    height: 150px;
+    line-height: 20px;
+    z-index: 999;
+}
+
+h2 {
+    font-weight: 100;
+    font-size: 24px;
 }
