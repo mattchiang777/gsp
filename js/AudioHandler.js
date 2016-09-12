@@ -1,4 +1,5 @@
-// https://javascriptweblog.wordpress.com/2010/07/06/function-declarations-vs-function-expressions/
+// Originally written by Felix Turner @felixturner
+// Modified by Matthew Chiang
 
 var AudioHandler = function() {
 
@@ -25,15 +26,6 @@ var AudioHandler = function() {
 	var gotBeat = false;
 	var beatCutOff = 0;
 	var beatTime = 0;
-
-	var debugCtx;
-	var debugW = 1200; // 330
-	var debugH = 900; // 250
-	var chartW = 300;
-	var chartH = 250;
-	var aveBarWidth = 30;
-	var debugSpacing = 2;
-	var gradient;
 
 	var freqByteData; // bars - bar data is from 0-256 in 512 bins. no sound is 0.
 	var timeByteData; // waveform - waveform data is 0-256 for 512 bins. no sound is 128.
@@ -66,6 +58,7 @@ var AudioHandler = function() {
 		// EVENT HANDLERS
 		events.on("update", update);
 
+		// Create the audio context and analyser
 		audioContext = new window.AudioContext();
 		analyser = audioContext.createAnalyser();
 		analyser.smoothingTimeConstant = 0.8; // 0 <-> 1. 0 is no time smoothing
@@ -86,10 +79,8 @@ var AudioHandler = function() {
 	}
 
 	function preShake() {
-		// debugCtx.save();
 		var dx = (Math.floor(Math.random()*201)-100) / 5;
 		var dy = (Math.floor(Math.random()*201)-100) / 5;
-		// debugCtx.translate(dx, dy);
 	}
 
 	function postShake() {
@@ -112,12 +103,12 @@ var AudioHandler = function() {
 
 		initSound();
 
-		// Load asynchronously
+		// Load the sample song asynchronously
 		var request = new XMLHttpRequest();
 		request.open("GET", ControlsHandler.audioParams.sampleURL, true);
 		request.responseType = "arraybuffer";
 
-		// When loaded, decode the data
+		// When loaded, decode the song's data
 		request.onload = function() {
 			audioContext.decodeAudioData(request.response, function(buffer) {
 				audioBuffer = buffer;
@@ -239,7 +230,7 @@ var AudioHandler = function() {
 
 				// errorCallback
 				function(err) {
-					alert("The following error occured: " + err);
+					alert("The following error occurred: " + err);
 				}
 			);
 		} else {
@@ -322,13 +313,18 @@ var AudioHandler = function() {
 		postShake();
 	}
 
+	function getLevel() {
+		// console.log(level);
+		return level;
+	}
+
 	return {
 		onMP3Drop: onMP3Drop,
 		onUseMic:onUseMic,
 		onUseSample:onUseSample,
 		update:update,
 		init:init,
-		circlesLength:circles,
+		getLevel: getLevel,
 		onTogglePlay:onTogglePlay
 	};
 }();

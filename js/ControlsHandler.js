@@ -1,4 +1,5 @@
-// http://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage
+// Originally written by Felix Turner @felixturner
+// Modified by Matthew Chiang
 
 var ControlsHandler = function() {
 

@@ -85,8 +85,10 @@ function transform() {
             // Expand the vertices
             // CHANGE CODE HERE TO MESS WITH EXPANSION SPEED
             else {
-                v.x += Math.random() * x / 25;
-                v.y += Math.random() * y / 25;
+                // v.x += Math.random() * x / 25;
+                // v.y += Math.random() * y / 25;
+                v.x += AudioHandler.getLevel() * x / 25;
+                v.y += AudioHandler.getLevel() * y / 25;
                 textGroup.opacity -= 1/10000;
             }
         }
