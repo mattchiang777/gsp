@@ -1,0 +1,40 @@
+body {
+  font-family: 'Proxima Nova', sans-serif;
+}
+
+#draw-shapes {
+    width: 100%;
+    height: 100%;
+    -webkit-animation-name: color-change;
+        animation-name: color-change;
+    -webkit-animation-duration: 1s;
+        animation-duration: 1s;
+    -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+        animation-direction: alternate;
+    /*Set our animation play state to paused initially */
+    -webkit-animation-play-state: paused;
+        animation-play-state: paused;
+}
+
+#draw-shapes:hover {
+    -webkit-animation-play-state: running;
+        animation-play-state: running;
+}
+
+@-webkit-keyframes color-change {
+    0% {background: #e3e3e3;}
+    25% {background: #36F2B8;}
+    50% {background: #58585B;}
+    75% {background: #C1B257;}
+    100% {background: #FF5185;}
+}
+
+@keyframes color-change {
+    0% {background: #e3e3e3;}
+    25% {background: #36F2B8;}
+    50% {background: #58585B;}
+    75% {background: #C1B257;}
+    100% {background: #FF5185;}
+}
