@@ -1,6 +1,15 @@
-// Written by Matthew Chiang
-// 1. Create index.js documentation
-// 2. Get Proxima Nova somehow?
+/*
+    Written by Matthew Chiang @phattyphresh
+    Animation details:
+    1. Logo fades with sound. When sound stops, the logo reappears
+    2. TODO Sync the vertex expansions better, don't just use levels for this part, maybe BPM?
+    3. Background CSS animation is synced using overall sound level
+    4. Toggle "Use Mic" to use the computer's microphone to take in sound.
+    5. Works best on Chrome
+
+    TODO Create better documentation
+    TODO "Use Mic" UI has a bug where ticking useMic after having dropped an MP3 when the mic is on first replays the sample audio
+ */
 
 // Make an instance of two and place it on the page
 var elem = document.getElementById('draw-shapes');
@@ -87,10 +96,11 @@ function transform() {
             else {
                 // v.x += Math.random() * x / 25;
                 // v.y += Math.random() * y / 25;
-                v.x += AudioHandler.getLevel() * x / 5;
-                v.y += AudioHandler.getLevel() * y / 5;
-                textGroup.opacity -= 1/1000;
+                v.x += AudioHandler.getLevel() * x / 25;
+                v.y += AudioHandler.getLevel() * y / 25;
+                textGroup.opacity -= 1 / 1000;
             }
+            
         }
     })
 };
@@ -99,7 +109,7 @@ function transform() {
 function bgChangeColor() {
     if (AudioHandler.getLevel() < 0.2) {
         $('#draw-shapes').css('animationDuration', '0s');
-        resetText();
+        resetTextOpacity();
         resetVertices();
     } else {
         var newDuration = AudioHandler.getLevel() * 25 + 's';
@@ -108,17 +118,61 @@ function bgChangeColor() {
 
 }
 
-function resetText() {
+function resetTextOpacity() {
     textGroup.opacity = 1;
 }
+
+/*
+    Redraw the circles back to their original vertices if sound level gets low
+    1. Check if the x and y coordinates of the vertex is positive or negative (which quadrant)
+    2. Then check if it's past the original vertex position. If it is, decrease the position until it is.
+    @params v is the vertex
+    @params i is the index
+    @params x is the angle in radians for the x coordinate
+    @params y is the angle in radians for the y coordinate
+    @params rate is the shrink speed
+ */
+function shrink(v, i, x, y, rate) {
+    // bottom right
+    if (v.x > 0 && v.y > 0) {
+        if (v.x >= VERTICES[i].x && v.y >= VERTICES[i].y) {
+            v.x -= x / rate;
+            v.y -= y / rate;
+        }
+    }
+    // top right
+    else if (v.x > 0 && v.y < 0) {
+        if (v.x >= VERTICES[i].x && v.y <= VERTICES[i].y) {
+            v.x -= x / rate;
+            v.y -= y / rate;
+        }
+    }
+    // bottom left
+    else if (v.x < 0 && v.y > 0) {
+        if (v.x <= VERTICES[i].x && v.y >= VERTICES[i].y) {
+            v.x -= x / rate;
+            v.y -= y / rate;
+        }
+    }
+    // top left
+    else {
+        if (v.x <= VERTICES[i].x && v.y <= VERTICES[i].y) {
+            v.x -= x / rate;
+            v.y -= y / rate;
+        }
+    }
+};
 
 function resetVertices() {
     $.each(group.children, function(idx, val) {
         for (var i = 0; i < val.vertices.length; i++) {
             var v = val.vertices[i];
-            // Redraw the circles back to their original vertices if levels get low
-            v.x = VERTICES[i].x;
-            v.y = VERTICES[i].y;
+            var pct = (i + 1) / circle.vertices.length;
+            var theta = pct * Math.PI * 2;
+            var radius = Math.random() * two.height;
+            var x = radius * Math.cos(theta);
+            var y = radius * Math.sin(theta);
+            shrink(v, i, x, y, 500);
         }
     })
 }

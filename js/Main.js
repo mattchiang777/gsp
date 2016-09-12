@@ -48,7 +48,7 @@ var Main = function() {
 		return false;
 	}
 
-	// load dropped MP#
+	// load dropped MP3
 	function onDocumentDrop(evt) {
 		evt.stopPropagation();
 		evt.preventDefault();

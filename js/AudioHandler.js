@@ -11,7 +11,7 @@ var AudioHandler = function() {
 	var levelHistory = []; // last 256 ave norm levels
 	var bpmStart;
 
-	var sampleAudioURL = "../data/notorious.mp3"; // miguel_waves_tame_impala_remix
+	var sampleAudioURL;
 	var BEAT_HOLD_TIME = 40; // num of frames to hold a beat
 	var BEAT_DECAY_RATE = 0.98;
 	var BEAT_MIN = 0.15; // a volume less than this is no beat
@@ -94,6 +94,10 @@ var AudioHandler = function() {
 
 	function initSound() {
 		source = audioContext.createBufferSource();
+		analyser = audioContext.createAnalyser();
+		analyser.smoothingTimeConstant = 0.8; // 0 <-> 1. 0 is no time smoothing
+		analyser.fftSize = 1024;
+		analyser.connect(audioContext.destination);
 		source.connect(analyser);
 	}
 
@@ -140,24 +144,25 @@ var AudioHandler = function() {
 	function stopSound() {
 		isPlayingAudio = false;
 		if (source) {
-			source.stop(0);
-			source.disconnect();
+			// source.stop();
+			source.disconnect(); // what does disconnect with no parameters do?
 		}
 	}
 
 	function onUseMic() {
+		console.log("onUseMic:" + ControlsHandler.audioParams.useMic);
 		if (ControlsHandler.audioParams.useMic) {
 			ControlsHandler.audioParams.useSample = false;
 			getMicInput();
 		} else {
-			stopSound();
+			ControlsHandler.audioParams.useSample = true;
+			onUseSample(); //
 		}
 	}
 
 	function onUseSample() {
 		if (ControlsHandler.audioParams.useSample) {
 			loadSampleAudio();
-			ControlsHandler.audioParams.useMic = false;
 		} else {
 			stopSound();
 		}
@@ -167,9 +172,9 @@ var AudioHandler = function() {
 	function onMP3Drop(evt) {
 
 		// TODO - uncheck mic and sample in CP
-
 		ControlsHandler.audioParams.useSample = false;
 		ControlsHandler.audioParams.useMic = false;
+		console.log("onMP3Drop:" + ControlsHandler.audioParams.useMic);
 
 		stopSound();
 

@@ -1,7 +1,7 @@
 /* Logo styling */
 
 body {
-    font-family: 'Proxima Nova', sans-serif;
+    font-family: 'Helvetica Neue', sans-serif;
 }
 
 #draw-shapes {
@@ -16,11 +16,6 @@ body {
     -webkit-animation-direction: alternate;
         animation-direction: alternate;
     /*Set our animation play state to paused initially */
-    -webkit-animation-play-state: running;
-        animation-play-state: running;
-}
-
-#draw-shapes:hover {
     -webkit-animation-play-state: running;
         animation-play-state: running;
 }
@@ -46,23 +41,20 @@ body {
 #controls {
     position:absolute;
     background-color: #000;
-    top: 400px;
-    right:10px;
-    width:250px;
+    top: 48px;
+    left: 0;
     z-index: 999;
+    opacity: 0.8;
 }
 
 #info {
     position:absolute;
-    top: 0px;
-    right:10px;
-    width:250px;
-    height: 150px;
-    line-height: 20px;
+    bottom: 2%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    /*right:10px;*/
+    /*width:250px;*/
+    /*height: 150px;*/
     z-index: 999;
-}
-
-h2 {
-    font-weight: 100;
-    font-size: 24px;
+    font-size: 15px;
 }
