@@ -95,12 +95,12 @@ function transform() {
             // CHANGE CODE HERE TO MESS WITH EXPANSION SPEED
             else {
                 // Comment/uncomment these two lines to use overall sound level
-                // v.x += AudioHandler.getLevel() * x / 25;
-                // v.y += AudioHandler.getLevel() * y / 25;
+                v.x += AudioHandler.getLevel() * x / 25;
+                v.y += AudioHandler.getLevel() * y / 25;
 
                 // Comment/uncomment these two lines to use the bass-centric algorithm
-                v.x += AudioHandler.getWeightedFreqByteData() * x * Math.floor(Math.random() * 25);
-                v.y += AudioHandler.getWeightedFreqByteData() * y * Math.floor(Math.random() * 25); // was / 25000
+                // v.x += AudioHandler.getWeightedFreqByteData() * x * Math.floor(Math.random() * 25);
+                // v.y += AudioHandler.getWeightedFreqByteData() * y * Math.floor(Math.random() * 25); // was / 25000
 
                 textGroup.opacity -= 1 / 1000;
             }

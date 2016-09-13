@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="56e13afb-07fe-4746-b6ff-732548a43edb" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/style.css" afterPath="$PROJECT_DIR$/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/AudioHandler.js" afterPath="$PROJECT_DIR$/js/AudioHandler.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/ControlsHandler.js" afterPath="$PROJECT_DIR$/js/ControlsHandler.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/index.js" afterPath="$PROJECT_DIR$/js/index.js" />
     </list>
     <ignored path="gsp.iws" />
@@ -27,7 +24,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="390">
@@ -47,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="100" column="26" selection-start-line="100" selection-start-column="26" selection-end-line="100" selection-end-column="26" />
+            <state relative-caret-position="119">
+              <caret line="98" column="56" selection-start-line="97" selection-start-column="16" selection-end-line="98" selection-end-column="56" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="n#!!block;n#shrink#0" expanded="false" />
@@ -110,9 +107,9 @@
         <option value="$PROJECT_DIR$/js/Main.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/js/AudioHandler.js" />
-        <option value="$PROJECT_DIR$/js/index.js" />
         <option value="$PROJECT_DIR$/js/ControlsHandler.js" />
         <option value="$PROJECT_DIR$/css/style.css" />
+        <option value="$PROJECT_DIR$/js/index.js" />
       </list>
     </option>
   </component>
@@ -236,12 +233,12 @@
       <workItem from="1473637157204" duration="12376000" />
       <workItem from="1473699229257" duration="7790000" />
       <workItem from="1473717967490" duration="5719000" />
-      <workItem from="1473736123921" duration="7265000" />
+      <workItem from="1473736123921" duration="8269000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33150000" />
+    <option name="totallyTimeSpent" value="34154000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="720" y="23" width="720" height="873" extended-state="0" />
@@ -496,30 +493,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/AudioHandler.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="345" column="9" selection-start-line="345" selection-start-column="9" selection-end-line="345" selection-end-column="9" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#2134#2242#0" expanded="false" />
-            <element signature="e#2266#2334#0" expanded="false" />
-            <element signature="e#2359#2394#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="100" column="26" selection-start-line="100" selection-start-column="26" selection-end-line="100" selection-end-column="26" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="n#!!block;n#shrink#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/ControlsHandler.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -535,6 +508,30 @@
         <state relative-caret-position="390">
           <caret line="43" column="10" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="10" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/AudioHandler.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="345" column="9" selection-start-line="345" selection-start-column="9" selection-end-line="345" selection-end-column="9" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#2134#2242#0" expanded="false" />
+            <element signature="e#2266#2334#0" expanded="false" />
+            <element signature="e#2359#2394#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="98" column="56" selection-start-line="97" selection-start-column="16" selection-end-line="98" selection-end-column="56" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!block;n#shrink#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
