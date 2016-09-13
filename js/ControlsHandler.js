@@ -10,7 +10,7 @@ var ControlsHandler = function() {
 		beatHoldTime:40,
 		beatDecayRate:0.97,
 		// sampleURL:"../data/miguel_waves_tame_impala_remix.mp3"
-		sampleURL:"/data/notorious.mp3"
+		sampleURL:"/gsp/data/notorious.mp3"
 	};
 
 	function init() {
