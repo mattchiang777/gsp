@@ -94,10 +94,14 @@ function transform() {
             // Expand the vertices
             // CHANGE CODE HERE TO MESS WITH EXPANSION SPEED
             else {
-                // v.x += Math.random() * x / 25;
-                // v.y += Math.random() * y / 25;
-                v.x += AudioHandler.getLevel() * x / 25;
-                v.y += AudioHandler.getLevel() * y / 25;
+                // Comment/uncomment these two lines to use overall sound level
+                // v.x += AudioHandler.getLevel() * x / 25;
+                // v.y += AudioHandler.getLevel() * y / 25;
+
+                // Comment/uncomment these two lines to use the bass-centric algorithm
+                v.x += AudioHandler.getWeightedFreqByteData() * x * Math.floor(Math.random() * 25);
+                v.y += AudioHandler.getWeightedFreqByteData() * y * Math.floor(Math.random() * 25); // was / 25000
+
                 textGroup.opacity -= 1 / 1000;
             }
             
@@ -130,7 +134,7 @@ function resetTextOpacity() {
     @params i is the index
     @params x is the angle in radians for the x coordinate
     @params y is the angle in radians for the y coordinate
-    @params rate is the shrink speed
+    @params rate is the shrink speed, the lower the faster
  */
 function shrink(v, i, x, y, rate) {
     // bottom right
@@ -172,7 +176,7 @@ function resetVertices() {
             var radius = Math.random() * two.height;
             var x = radius * Math.cos(theta);
             var y = radius * Math.sin(theta);
-            shrink(v, i, x, y, 500);
+            shrink(v, i, x, y, 250);
         }
     })
 }

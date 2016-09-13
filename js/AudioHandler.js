@@ -50,8 +50,6 @@ var AudioHandler = function() {
 	var interval = 1000/fps;
 	var delta;
 	var circles = [];
-	var shakeDuration = 800;
-	var shakeStartTime = -1;
 
 	function init() {
 
@@ -150,7 +148,7 @@ var AudioHandler = function() {
 	}
 
 	function onUseMic() {
-		console.log("onUseMic:" + ControlsHandler.audioParams.useMic);
+		// console.log("onUseMic:" + ControlsHandler.audioParams.useMic);
 		if (ControlsHandler.audioParams.useMic) {
 			ControlsHandler.audioParams.useSample = false;
 			getMicInput();
@@ -258,9 +256,10 @@ var AudioHandler = function() {
 		}
 
 		// GET DATA
-		analyser.getByteFrequencyData(freqByteData); // bar chart
+		analyser.getByteFrequencyData(freqByteData); // bar chart. Lower bins refer to lower frequency intervals (~86 Hz)
 		analyser.getByteTimeDomainData(timeByteData); // waveform
 
+		// console.log(freqByteData);
 		//normalize waveform data (add constant volume gain)
 		for (var i = 0; i < binCount; i++) {
 			waveData[i] = ((timeByteData[i] - 128) / 128) * ControlsHandler.audioParams.volSens;
@@ -298,9 +297,6 @@ var AudioHandler = function() {
 		if (level > beatCutOff && level > BEAT_MIN) {
 			onBeat();
 
-			// add a circle for the detected beat
-			preShake();
-
 			beatCutOff = level * 1.1;
 			beatTime = 0;
 		} else {
@@ -315,12 +311,45 @@ var AudioHandler = function() {
 		bpmTime = (new Date().getTime() - bpmStart)/msecsAvg;
 		// trace (bpmStart);
 
-		postShake();
+		makeWeightedFreqByteData();
 	}
 
 	function getLevel() {
 		// console.log(level);
 		return level;
+	}
+
+	function getFreqByteData() {
+		// console.log(freqByteData);
+		return freqByteData;
+	}
+
+	/*
+		Source: http://greenboy.us/fEARful/frequencytables.htm
+		Audio Context sample rate: 44100Hz so each bin is ~86Hz
+		Bass: 0-250Hz so first 3 bins
+		Mid: 250 to 2000Hz so 4th to 24th bins
+		Treble: 2000Hz+ so 25th bin and on
+
+		Returns a single value
+	 */
+	function makeWeightedFreqByteData() {
+		var arr = getFreqByteData();
+		var sum = 0;
+
+		// Give more weight to lower bass frequencies since they are harder to hear
+		for (var i = 0; i < 3; i++) {
+			sum += arr[i] * .001;
+		}
+		for (var i = 3; i < 24; i++) {
+			// sum += arr[i] * .0001;
+		}
+		for (var i = 25; i < arr.length; i++) {
+			// sum += arr[i] * 0.05;
+		}
+		var result = sum / arr.length * ControlsHandler.audioParams.volSens;
+		// console.log(result);
+		return result;
 	}
 
 	return {
@@ -330,6 +359,7 @@ var AudioHandler = function() {
 		update:update,
 		init:init,
 		getLevel: getLevel,
+		getWeightedFreqByteData: makeWeightedFreqByteData,
 		onTogglePlay:onTogglePlay
 	};
 }();

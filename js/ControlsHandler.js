@@ -9,7 +9,8 @@ var ControlsHandler = function() {
 		volSens:1,
 		beatHoldTime:40,
 		beatDecayRate:0.97,
-		sampleURL:"../data/miguel_waves_tame_impala_remix.mp3"
+		// sampleURL:"../data/miguel_waves_tame_impala_remix.mp3"
+		sampleURL:"../data/notorious.mp3"
 	};
 
 	function init() {
@@ -19,8 +20,8 @@ var ControlsHandler = function() {
 		var f2 = gui.addFolder('Settings');
 		f2.add(audioParams, 'useMic').listen().onChange(AudioHandler.onUseMic).name("Use Mic");
 		f2.add(audioParams, 'volSens', 0, 5).step(0.1).name("Gain");
-		f2.add(audioParams, 'beatHoldTime', 0, 100).step(1).name("Beat Hold");
-		f2.add(audioParams, 'beatDecayRate', 0.9, 1).step(0.01).name("Beat Decay");
+		// f2.add(audioParams, 'beatHoldTime', 0, 100).step(1).name("Beat Hold");
+		// f2.add(audioParams, 'beatDecayRate', 0.9, 1).step(0.01).name("Beat Decay");
 		f2.open();
 
 		AudioHandler.onUseMic();
