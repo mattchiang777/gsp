@@ -9,7 +9,7 @@ var ControlsHandler = function() {
 		volSens:1,
 		beatHoldTime:40,
 		beatDecayRate:0.97,
-		sampleURL:"gsp/data/roses.m4a"
+		sampleURL:"/gsp/data/roses.m4a"
 		// sampleURL:"/gsp/data/notorious.mp3"
 	};
 
