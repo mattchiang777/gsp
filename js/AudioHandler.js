@@ -9,12 +9,12 @@ var AudioHandler = function() {
 	var bpmTime = 0; // bpmTime ranges from 0 to 1. 0 = on beat. Based on tap bpm
 	var ratedBPMTime = 550; // time between beats (msec) multiplied by BPMRate
 	var levelHistory = []; // last 256 ave norm levels
-	var bpmStart;
+	var bpmStart = 0;
 
 	var sampleAudioURL;
 	var BEAT_HOLD_TIME = 40; // num of frames to hold a beat
 	var BEAT_DECAY_RATE = 0.98;
-	var BEAT_MIN = 0.15; // a volume less than this is no beat
+	var BEAT_MIN = 0.2; // a volume less than this is no beat
 
 	// BPM STUFF
 	var count = 0;
@@ -172,7 +172,7 @@ var AudioHandler = function() {
 		// TODO - uncheck mic and sample in CP
 		ControlsHandler.audioParams.useSample = false;
 		ControlsHandler.audioParams.useMic = false;
-		console.log("onMP3Drop:" + ControlsHandler.audioParams.useMic);
+		// console.log("onMP3Drop:" + ControlsHandler.audioParams.useMic);
 
 		stopSound();
 
@@ -296,7 +296,7 @@ var AudioHandler = function() {
 		// BEAT DETECTION
 		if (level > beatCutOff && level > BEAT_MIN) {
 			onBeat();
-
+			console.log("onBeat");
 			beatCutOff = level * 1.1;
 			beatTime = 0;
 		} else {
@@ -310,7 +310,6 @@ var AudioHandler = function() {
 
 		bpmTime = (new Date().getTime() - bpmStart)/msecsAvg;
 		// trace (bpmStart);
-
 		makeWeightedFreqByteData();
 	}
 
