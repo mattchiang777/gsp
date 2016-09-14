@@ -296,7 +296,7 @@ var AudioHandler = function() {
 		// BEAT DETECTION
 		if (level > beatCutOff && level > BEAT_MIN) {
 			onBeat();
-			console.log("onBeat");
+			// console.log("onBeat");
 			beatCutOff = level * 1.1;
 			beatTime = 0;
 		} else {

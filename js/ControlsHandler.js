@@ -6,11 +6,11 @@ var ControlsHandler = function() {
 	var audioParams = {
 		useMic: false,
 		useSample:true,
-		volSens:1,
+		volSens:0.5,
 		beatHoldTime:40,
 		beatDecayRate:0.97,
-		sampleURL:"/gsp/data/roses.m4a"
-		// sampleURL:"/gsp/data/notorious.mp3"
+		sampleURL:"/gsp/data/youandme.mp3"
+		// sampleURL:"../data/youandme.mp3"
 	};
 
 	function init() {
